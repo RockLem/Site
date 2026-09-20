@@ -1,0 +1,253 @@
+/* ==========================================================================
+   1. VARIABLES GLOBALES
+   ========================================================================== */
+:root {
+    /* Couleurs Thème Clair */
+    --bg-light: #f5f5f5;
+    --text-light: #000000;
+    --card-light: #ffffff;
+    --border-light: #cccccc;
+
+    /* Couleurs Thème Sombre */
+    --bg-dark: #121212;
+    --text-dark: #f0f0f0;
+    --card-dark: #1e1e1e;
+    --border-dark: #444444;
+
+    /* Couleurs Principales (Boutons, En-têtes) */
+    --color-primary: #007bff;
+    --color-hover: #0056b3;
+}
+
+/* ==========================================================================
+   2. STYLES DE BASE (BODY & TYPOGRAPHIE)
+   ========================================================================== */
+body {
+    font-family: 'Orbitron', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    text-align: center;
+    padding: 40px 20px 80px;
+    margin: 0;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1 { font-size: 26px; margin-bottom: 20px; color: var(--color-primary); }
+h2 { font-size: 20px; margin-top: 30px; margin-bottom: 15px; }
+p { font-size: 16px; line-height: 1.6; margin-bottom: 15px; }
+
+ul, ol {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    font-size: 15px;
+    line-height: 1.6;
+}
+li { margin-bottom: 8px; }
+
+/* ==========================================================================
+   3. CONTENEURS ET CARTES
+   ========================================================================== */
+.card, .container {
+    max-width: 800px;
+    margin: 20px auto 30px;
+    background-color: var(--card-light);
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease;
+    transition: background-color 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   4. BOUTONS ET LIENS
+   ========================================================================== */
+button, .btn-link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--color-primary);
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+button:hover, .btn-link:hover {
+    background-color: var(--color-hover);
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+button:active { transform: scale(0.98); }
+
+.ligne-boutons, .boutons-controle {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* ==========================================================================
+   5. FORMULAIRES (INPUTS, SELECTS)
+   ========================================================================== */
+input[type="text"], input[type="number"], input[type="password"], select {
+    padding: 8px;
+    font-size: 15px;
+    font-family: inherit;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    text-align: center;
+    transition: border-color 0.3s ease;
+}
+
+input[type="number"] { width: 60px; }
+input[type="number"]:focus, input[type="text"]:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#progressBar {
+    width: 80%;
+    max-width: 400px;
+    margin: 15px auto;
+}
+
+/* ==========================================================================
+   6. TABLEAUX DE SCORES
+   ========================================================================== */
+table {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    border-collapse: collapse;
+    background-color: var(--card-light);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+th, td {
+    border: 1px solid var(--border-light);
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+/* ==========================================================================
+   7. NAVIGATION (MENU HAMBURGER)
+   ========================================================================== */
+#menu-toggle {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1001;
+    color: var(--color-primary);
+}
+
+#menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 220px;
+    height: 100%;
+    background-color: var(--card-light);
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+    transition: left 0.3s ease;
+    padding-top: 60px;
+    z-index: 1000;
+}
+
+#menu.open { left: 0; }
+#menu ul { list-style: none; padding: 0; margin: 0; }
+#menu ul li { margin: 15px 0; }
+#menu ul li a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 16px;
+    padding: 10px 20px;
+    display: block;
+    transition: background-color 0.2s;
+}
+#menu ul li a:hover { background-color: rgba(0, 123, 255, 0.1); }
+
+/* Bouton Thème */
+#bouton-mode {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1001;
+    font-size: 14px;
+    padding: 8px 12px;
+    margin: 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* ==========================================================================
+   8. MODE SOMBRE (DARK MODE)
+   ========================================================================== */
+body.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+}
+
+body.dark-mode .card, body.dark-mode .container, 
+body.dark-mode table, body.dark-mode #menu {
+    background-color: var(--card-dark);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+body.dark-mode th, body.dark-mode td, 
+body.dark-mode input, body.dark-mode select {
+    border-color: var(--border-dark);
+}
+
+body.dark-mode input, body.dark-mode select {
+    background-color: #333;
+    color: var(--text-dark);
+}
+
+body.dark-mode #menu ul li a { color: var(--text-dark); }
+body.dark-mode button, body.dark-mode .btn-link { background-color: #333; border: 1px solid #555; }
+body.dark-mode button:hover, body.dark-mode .btn-link:hover { background-color: #555; }
+body.dark-mode th { background-color: #333; }
+
+/* Lignes alternées pour l'historique en mode sombre */
+body.dark-mode tr:nth-child(even) { background-color: #2a2a2a; }
+
+/* ==========================================================================
+   9. UTILITAIRES (Erreurs, iframes, etc.)
+   ========================================================================== */
+iframe {
+    width: 100%;
+    max-width: 640px;
+    height: 700px;
+    border: none;
+    margin: 0 auto;
+    display: block;
+}
+
+.detail-box {
+    display: none;
+    background: #e9f2ff;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 6px;
+    text-align: left;
+}
+body.dark-mode .detail-box { background: #2a2a2a; }
