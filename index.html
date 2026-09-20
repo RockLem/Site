@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timer & Scores - Tir Sportif</title>
+  
+  <!-- Sécurité (CryptoJS) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  
+  <!-- Graphiques (Chart.js) et Génération de PDF (jsPDF) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/global.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#007bff">
+</head>
+<body>
+
+  <div id="menu-toggle" style="display: none;"><i class="fas fa-bars"></i></div>
+  <button id="bouton-mode" onclick="toggleMode()">🌞 Mode jour</button>
+
+  <nav id="menu">
+    <ul>
+      <li><a href="#" onclick="naviguer('accueil')">🏠 Accueil</a></li>
+      <li><a href="#" onclick="naviguer('timer')">⏱️ Timer & Audio</a></li>
+      <li><a href="#" onclick="naviguer('scores')">🏅 Saisir un score</a></li>
+      <li><a href="#" onclick="naviguer('historique')">📊 Historique</a></li>
+      <li><a href="#" onclick="naviguer('statistiques')">📈 Statistiques</a></li>
+    </ul>
+  </nav>
+
+  <main id="app-content"></main>
+
+  <div id="audio-controls-container" style="display: none;">
+    <div class="card" style="margin-top: 30px;">
+      <div class="boutons-controle">
+        <button onclick="playSon()"><i class="fas fa-play"></i></button>
+        <button onclick="pauseSon()"><i class="fas fa-pause"></i></button>
+        <button onclick="stopSon()"><i class="fas fa-stop"></i></button>
+      </div>
+      
+      <p id="temps" style="margin: 15px 0;">⏱️ 0:00 / 0:00</p>
+      <input type="range" id="progressBar" value="0" min="0" step="1">
+      
+      <div style="margin-top: 15px; display: flex; justify-content: center; align-items: center; gap: 10px;">
+        <input type="text" id="tempsCible" placeholder="Ex: 2:05" style="width: 100px; text-align: center;" onkeydown="if(event.key === 'Enter') allerAuTemps()">
+        <button onclick="allerAuTemps()"><i class="fas fa-forward"></i> Aller</button>
+      </div>
+
+      <audio id="lecteur"></audio>
+    </div>
+  </div>
+
+  <!-- Intégration des 5 fichiers JavaScript modulaires -->
+  <script src="JavaScript/config.js"></script>
+  <script src="JavaScript/audio_timer.js"></script>
+  <script src="JavaScript/scores_data.js"></script>
+  <script src="JavaScript/export_stats.js"></script>
+  <script src="JavaScript/ui_nav.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(registration => console.log('ServiceWorker enregistré !'))
+          .catch(error => console.log('Échec du ServiceWorker:', error));
+      });
+    }
+  </script>
+</body>
+</html>
